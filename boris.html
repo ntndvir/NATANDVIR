@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boris S. Dobroborsky | Research</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper: #f9f7f3;
+      --ink: #1a1a1a;
+      --rule: #d4cfc5;
+      --accent: #2a5298;
+      --accent-warm: #8b2c0a;
+      --mid: #5a5a5a;
+      --light-bg: #f1ede4;
+      --border-strong: #b8b0a2;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Source Sans 3', 'Georgia', serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    /* ── NAV — Natan Dvir unified brand ── */
+    nav {
+      background: var(--paper);
+      border-bottom: 2px solid var(--ink);
+      padding: 1rem 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+      gap: 1.5rem;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 1rem; }
+    .nav-logo-link { text-decoration: none; display: flex; flex-direction: column; line-height: 1.1; }
+    .nav-logo-main {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.15rem; color: var(--ink); direction: rtl;
+    }
+    .nav-logo-main strong { color: var(--accent-warm); }
+    .nav-logo-sub { font-size: 0.65rem; color: var(--mid); letter-spacing: 0.12em; text-transform: uppercase; }
+    .nav-section-badge {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent);
+      background: rgba(42,82,152,0.08);
+      border: 1px solid rgba(42,82,152,0.2);
+      padding: 0.2rem 0.6rem; border-radius: 2rem;
+    }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.82rem; color: var(--ink); text-decoration: none;
+      font-weight: 600; letter-spacing: 0.03em;
+      border-bottom: 2px solid transparent; padding-bottom: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .nav-links a:hover { border-color: var(--accent); color: var(--accent); }
+    .nav-back {
+      color: var(--mid) !important; font-size: 0.78rem !important;
+      border-bottom: none !important; font-style: italic;
+    }
+    .nav-back:hover { color: var(--accent) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--ink);
+      color: #f9f7f3;
+      padding: 5rem 3rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 50%; height: 100%;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent, transparent 40px,
+        rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px
+      );
+    }
+    .hero-inner { max-width: 860px; position: relative; z-index: 2; }
+    .hero-eyebrow {
+      font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(249,247,243,0.5); margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 700; line-height: 1.1;
+      letter-spacing: -0.5px; margin-bottom: 0.5rem;
+    }
+    .hero-title-accent { color: rgba(249,247,243,0.55); font-style: italic; }
+    .hero-sub {
+      font-size: 1.05rem; color: rgba(249,247,243,0.65);
+      max-width: 580px; margin: 1.5rem 0 2.5rem;
+      line-height: 1.7;
+    }
+    .hero-meta {
+      display: flex; gap: 2rem; flex-wrap: wrap;
+      font-size: 0.82rem; color: rgba(249,247,243,0.5);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 1.5rem; margin-top: 0.5rem;
+    }
+    .hero-meta span strong { display: block; color: rgba(249,247,243,0.85); font-size: 0.9rem; margin-bottom: 1px; }
+
+    /* ── MAIN LAYOUT ── */
+    .page-body {
+      max-width: 1100px; margin: 0 auto;
+      padding: 4rem 3rem;
+      display: grid; grid-template-columns: 1fr 280px; gap: 5rem;
+    }
+    .main-content {}
+    .sidebar {}
+
+    /* ── SECTION TITLES ── */
+    .section-rule {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .section-rule h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.3rem; font-weight: 700;
+      white-space: nowrap;
+    }
+    .section-rule::after {
+      content: ''; flex: 1;
+      height: 1px; background: var(--rule);
+    }
+
+    /* ── RESEARCH GROUPS ── */
+    .research-group { margin-bottom: 3.5rem; }
+    .group-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 1.2rem; padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .project-card {
+      padding: 1.5rem;
+      border: 1px solid var(--rule);
+      border-radius: 0; /* academic = sharp corners */
+      margin-bottom: 1rem;
+      background: white;
+      position: relative;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .project-card:hover {
+      border-color: var(--accent);
+      box-shadow: 4px 0 0 var(--accent) inset;
+    }
+    .project-card h3 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--ink); margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+    .project-card p {
+      font-size: 0.88rem; color: var(--mid);
+      line-height: 1.65; margin-bottom: 0.6rem;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
+    .ptag {
+      font-size: 0.7rem; font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      background: var(--light-bg);
+      color: var(--mid);
+      border: 1px solid var(--rule);
+      letter-spacing: 0.04em;
+    }
+    .ptag.blue { background: rgba(42,82,152,0.08); color: var(--accent); border-color: rgba(42,82,152,0.2); }
+
+    /* ── BIOGRAPHY ── */
+    .bio-text {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1rem; line-height: 1.85;
+      color: #2a2a2a; margin-bottom: 1rem;
+    }
+    .bio-text em { font-style: italic; }
+
+    /* ── SIDEBAR ── */
+    .sidebar-widget {
+      margin-bottom: 2.5rem;
+    }
+    .sidebar-widget h3 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.85rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--ink); margin-bottom: 1rem;
+      padding-bottom: 0.5rem; border-bottom: 2px solid var(--ink);
+    }
+    .contact-list { list-style: none; }
+    .contact-list li {
+      font-size: 0.85rem; color: var(--mid);
+      padding: 0.5rem 0; border-bottom: 1px solid var(--rule);
+      display: flex; flex-direction: column; gap: 0.15rem;
+    }
+    .contact-list li strong { color: var(--ink); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em; }
+    .contact-list a { color: var(--accent); text-decoration: none; }
+    .contact-list a:hover { text-decoration: underline; }
+
+    .fields-list { list-style: none; }
+    .fields-list li {
+      font-size: 0.85rem; padding: 0.4rem 0 0.4rem 1.2rem;
+      border-bottom: 1px solid var(--rule); color: var(--mid);
+      position: relative;
+    }
+    .fields-list li::before {
+      content: '▸';
+      position: absolute; left: 0;
+      color: var(--accent); font-size: 0.7rem;
+    }
+
+    .stat-box {
+      background: var(--ink); color: var(--paper);
+      padding: 1.5rem; margin-top: 1.5rem;
+    }
+    .stat-box .sb-num {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.5rem; font-weight: 700; color: rgba(249,247,243,0.9);
+      line-height: 1;
+    }
+    .stat-box .sb-label { font-size: 0.78rem; color: rgba(249,247,243,0.5); margin-top: 0.3rem; letter-spacing: 0.06em; }
+
+    /* ── HERO PHOTO ── */
+    .hero-layout {
+      display: flex; align-items: flex-start; gap: 3rem;
+    }
+    .hero-portrait {
+      flex-shrink: 0;
+      width: 180px; height: 220px;
+      object-fit: cover; object-position: center top;
+      border: 3px solid #2a5298;
+      box-shadow: 6px 6px 0 rgba(42,82,152,0.25);
+    }
+
+    /* ── GALLERY ── */
+    .gallery-section {
+      background: var(--light-bg);
+      border-top: 2px solid var(--ink);
+      padding: 4rem 3rem;
+    }
+    .gallery-section-inner { max-width: 1100px; margin: 0 auto; }
+    .gallery-section h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.3rem; font-weight: 700;
+      margin-bottom: 1.5rem; padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .gallery-grid-boris {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem;
+    }
+    .gallery-grid-boris img {
+      width: 100%; aspect-ratio: 4/3; object-fit: cover;
+      filter: grayscale(30%);
+      transition: filter 0.3s, transform 0.3s;
+      cursor: pointer;
+    }
+    .gallery-grid-boris img:hover { filter: grayscale(0%); transform: scale(1.02); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 2px solid var(--ink);
+      background: var(--light-bg);
+      padding: 2rem 3rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    footer p { font-size: 0.8rem; color: var(--mid); }
+    footer a { color: var(--accent); text-decoration: none; font-size: 0.8rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 800px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { padding: 3rem 1.5rem; }
+      .hero-layout { flex-direction: column; gap: 1.5rem; }
+      .hero-portrait { width: 130px; height: 160px; }
+      .page-body { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 3rem; }
+      .sidebar { order: -1; }
+      footer { flex-direction: column; padding: 2rem 1.5rem; }
+      .topbar { padding: 0.4rem 1.5rem; }
+      .gallery-section { padding: 3rem 1.5rem; }
+      .gallery-grid-boris { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV — Natan Dvir brand -->
+<nav>
+  <div class="nav-brand">
+    <a href="index.html" class="nav-logo-link">
+      <img src="logo.png" alt="Natan Dvir" style="height:40px; width:auto;" />
+    </a>
+    <span class="nav-section-badge">Research</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Pneumatics</a></li>
+    <li><a href="#ergonomics">Ergonomics</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="index.html" class="nav-back">← natandvir</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-layout">
+    <img src="boris - 1.webp" alt="Boris S. Dobroborsky" class="hero-portrait" />
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Academic Research Portfolio</p>
+      <h1>
+        Boris S. Dobroborsky
+        <span class="hero-title-accent"><br/>Dr. of Sciences</span>
+      </h1>
+      <p class="hero-sub">
+        Decades of applied research spanning pneumatic engineering, vibration safety, ergonomics,
+        and human-centered workplace design. Inventions adopted in industrial and clinical settings.
+      </p>
+      <div class="hero-meta">
+        <span><strong>Primary Fields</strong>Physics · Pneumatics · Ergonomics</span>
+        <span><strong>Location</strong>Russia · Israel</span>
+        <span><strong>Contact</strong>5542797@rambler.ru</span>
+        <span><strong>Phone</strong>+7 909 592-47-83</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="page-body">
+  <main class="main-content">
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-rule"><h2>About</h2></div>
+      <p class="bio-text">
+        Dr. Boris S. Dobroborsky is an applied researcher and inventor with extensive experience 
+        in mechanical engineering, pneumatic systems, and occupational safety. His work bridges 
+        <em>fundamental physics</em> with real-world engineering challenges — from reducing 
+        vibration-induced injuries in industrial workers to designing ergonomic workplaces for 
+        people with disabilities.
+      </p>
+      <p class="bio-text">
+        His inventions include a family of vibration-safe pneumatic impact machines, ergonomic 
+        workstation concepts for computer users and air traffic controllers, and adapted computer 
+        environments for users with mobility impairments. Throughout his career, Boris has combined 
+        rigorous scientific methodology with a deep commitment to human safety and wellbeing.
+      </p>
+    </section>
+
+    <!-- PNEUMATIC RESEARCH -->
+    <section id="research" style="margin-top:3.5rem;">
+      <div class="section-rule"><h2>Pneumatic Impact Machines</h2></div>
+
+      <div class="research-group">
+        <div class="group-label">Portable Pneumatic Impact Machines</div>
+
+        <div class="project-card">
+          <h3>Vibration Safe Pneumatic Breaker PB3-D1</h3>
+          <p>
+            Development of a portable pneumatic breaker incorporating anti-vibration mechanisms 
+            to minimize hand-arm vibration transmitted to the operator. Designed to comply with 
+            occupational safety standards while maintaining high impact efficiency.
+          </p>
+          <div class="project-tags">
+            <span class="ptag blue">Pneumatics</span>
+            <span class="ptag">Vibration Safety</span>
+            <span class="ptag">Industrial Tools</span>
+            <span class="ptag">Occupational Health</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3>Vibration Safe Pneumatic Breaker PB3-D2</h3>
+          <p>
+            Second-generation vibration-safe pneumatic breaker with improved damping geometry 
+            and refined ergonomic grip design. Addresses limitations of the PB3-D1 with enhanced 
+            energy absorption at multiple frequency bands.
+          </p>
+          <div class="project-tags">
+            <span class="ptag blue">Pneumatics</span>
+            <span class="ptag">Vibration Safety</span>
+            <span class="ptag">Engineering Design</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3>Vibration Safe Pneumatic Rock Drill</h3>
+          <p>
+            A pneumatic rock drilling device engineered with integrated vibration-isolation 
+            features for use in mining and construction environments. Focus on operator protection 
+            under sustained high-impact conditions.
+          </p>
+          <div class="project-tags">
+            <span class="ptag blue">Rock Drilling</span>
+            <span class="ptag">Mining Safety</span>
+            <span class="ptag">Vibration Isolation</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3>Pneumatic Perforator for Drilling Horizontal Holes</h3>
+          <p>
+            Specialized pneumatic perforator designed for horizontal drilling applications in 
+            civil engineering and underground installations, optimizing thrust-to-vibration ratio 
+            for precision work.
+          </p>
+          <div class="project-tags">
+            <span class="ptag blue">Civil Engineering</span>
+            <span class="ptag">Horizontal Drilling</span>
+            <span class="ptag">Pneumatic Systems</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ERGONOMICS -->
+    <section id="ergonomics" style="margin-top:3.5rem;">
+      <div class="section-rule"><h2>Ergonomic Developments</h2></div>
+
+      <div class="research-group">
+        <div class="group-label">Human-Centered Workplace Design</div>
+
+        <div class="project-card">
+          <h3>Ergonomic Computer Workspace</h3>
+          <p>
+            A systematic ergonomic approach to computer workstation design, addressing postural 
+            strain, visual fatigue, and repetitive motion injuries common in prolonged computer 
+            use. Based on biomechanical analysis and user studies.
+          </p>
+          <div class="project-tags">
+            <span class="ptag blue">Ergonomics</span>
+            <span class="ptag">Workstation Design</span>
+            <span class="ptag">Biomechanics</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3>Computer Table for Users with Lower-Extremity Mobility Impairments</h3>
+          <p>
+            Adaptive computer workstation designed for users experiencing swelling or reduced 
+            mobility in the lower extremities. Incorporates adjustable height, accessible reach 
+            zones, and support structures to enable comfortable and productive computer use.
+          </p>
+          <div class="project-tags">
+            <span class="ptag blue">Inclusive Design</span>
+            <span class="ptag">Adaptive Technology</span>
+            <span class="ptag">Accessibility</span>
+            <span class="ptag">Medical Engineering</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3>Ergonomic Air Traffic Controller Workplace</h3>
+          <p>
+            Analysis and redesign of the air traffic controller workstation with attention to 
+            sustained vigilance demands, display placement, and seated posture over extended 
+            operational shifts. Addresses both physical and cognitive ergonomic factors.
+          </p>
+          <div class="project-tags">
+            <span class="ptag blue">Aviation Ergonomics</span>
+            <span class="ptag">Cognitive Ergonomics</span>
+            <span class="ptag">Safety-Critical Systems</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3>Improved Method of Visual Measurements</h3>
+          <p>
+            Development of a refined methodology for visual measurement tasks, improving 
+            accuracy and reducing operator eye strain in precision inspection and quality-control 
+            environments.
+          </p>
+          <div class="project-tags">
+            <span class="ptag blue">Visual Ergonomics</span>
+            <span class="ptag">Measurement Methods</span>
+            <span class="ptag">Quality Control</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="sidebar-widget" id="contact">
+      <h3>Contact</h3>
+      <ul class="contact-list">
+        <li>
+          <strong>Phone</strong>
+          <span>+7 909 592-47-83</span>
+        </li>
+        <li>
+          <strong>Email</strong>
+          <a href="mailto:5542797@rambler.ru">5542797@rambler.ru</a>
+        </li>
+        <li>
+          <strong>Location</strong>
+          <span>Russia · Israel</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="sidebar-widget">
+      <h3>Research Fields</h3>
+      <ul class="fields-list">
+        <li>Physics</li>
+        <li>Energy Systems</li>
+        <li>Ecology</li>
+        <li>Biology</li>
+        <li>Occupational Safety</li>
+        <li>Pneumatic Engineering</li>
+        <li>Ergonomics</li>
+        <li>Adaptive Technology</li>
+      </ul>
+    </div>
+
+    <div class="sidebar-widget">
+      <h3>Research Areas</h3>
+      <div class="stat-box">
+        <div class="sb-num">2</div>
+        <div class="sb-label">Major Research Categories</div>
+      </div>
+      <div class="stat-box" style="margin-top:0.5rem; background: #2a5298;">
+        <div class="sb-num">4+</div>
+        <div class="sb-label">Pneumatic Machine Designs</div>
+      </div>
+      <div class="stat-box" style="margin-top:0.5rem; background: #4a4a4a;">
+        <div class="sb-num">4</div>
+        <div class="sb-label">Ergonomic Inventions</div>
+      </div>
+    </div>
+
+
+
+  </aside>
+</div>
+
+<!-- GALLERY -->
+<div class="gallery-section">
+  <div class="gallery-section-inner">
+    <h2>Photo Archive</h2>
+    <div class="gallery-grid-boris">
+      <img src="boris - 2.jpg"  alt="Boris Dobroborsky" loading="lazy" />
+      <img src="boris - 3.webp" alt="Boris Dobroborsky" loading="lazy" />
+      <img src="boris - 4.webp" alt="Boris Dobroborsky" loading="lazy" />
+      <img src="boris - 5.webp" alt="Boris Dobroborsky" loading="lazy" />
+      <img src="boris - 6.webp" alt="Boris Dobroborsky" loading="lazy" />
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <strong>Natan Dvir</strong> · Boris S. Dobroborsky Research · Russia · Israel</p>
+  <a href="index.html">← natandvir.co.il</a>
+</footer>
+
+</body>
+</html>
