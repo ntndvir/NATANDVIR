@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>נתן דביר | למידה דיגיטלית ובינה מלאכותית</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0d1117;
+      --cream: #f5f0e8;
+      --accent: #e85d26;
+      --accent2: #1a6b4a;
+      --gold: #c9a84c;
+      --light: #fafaf7;
+      --mid: #6b7280;
+      --border: #e0d9cc;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Assistant', 'Heebo', sans-serif;
+      background: var(--light);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; right: 0; left: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(245,240,232,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Heebo', sans-serif;
+      font-weight: 900; font-size: 1.3rem; letter-spacing: -0.5px;
+      color: var(--ink); text-decoration: none;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .nav-logo img { height: 36px; width: auto; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.9rem; font-weight: 500; color: var(--ink);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      background: var(--accent); color: #fff;
+      padding: 0.5rem 1.2rem; border-radius: 2rem;
+      font-weight: 600; font-size: 0.85rem;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: #c94d18; }
+    .nav-research {
+      font-size: 0.82rem; color: var(--mid); font-weight: 500;
+      text-decoration: none; border-bottom: 1px dashed var(--mid);
+      padding-bottom: 1px; transition: color 0.2s;
+    }
+    .nav-research:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 8rem 3rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 80% 50%, rgba(232,93,38,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 50% at 20% 80%, rgba(26,107,74,0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-text { position: relative; z-index: 2; }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(232,93,38,0.1);
+      color: var(--accent);
+      font-size: 0.8rem; font-weight: 700;
+      padding: 0.3rem 0.9rem; border-radius: 2rem;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'Heebo', sans-serif;
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      font-weight: 900; line-height: 1.05;
+      letter-spacing: -1px; margin-bottom: 1rem;
+    }
+    .hero h1 em {
+      font-style: normal; color: var(--accent);
+      position: relative; display: inline-block;
+    }
+    .hero h1 em::after {
+      content: '';
+      position: absolute; bottom: 4px; right: 0; left: 0;
+      height: 3px; background: var(--accent); opacity: 0.3;
+    }
+    .hero-subtitle {
+      font-size: 1.15rem; color: var(--mid); line-height: 1.7;
+      max-width: 520px; margin-bottom: 2.5rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--ink); color: var(--cream);
+      padding: 0.85rem 2rem; border-radius: 0.3rem;
+      font-weight: 700; font-size: 1rem;
+      text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 4px 4px 0 var(--accent);
+    }
+    .btn-primary:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--accent); }
+    .btn-secondary {
+      color: var(--ink); font-weight: 600; font-size: 1rem;
+      text-decoration: none; display: flex; align-items: center; gap: 0.4rem;
+      border-bottom: 2px solid var(--ink); padding-bottom: 1px;
+    }
+
+    /* hero visual */
+    .hero-visual {
+      position: relative; z-index: 2;
+      display: flex; justify-content: center; align-items: center;
+    }
+    .hero-photo {
+      display: block;
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      object-fit: cover; object-position: center top;
+      border: 3px solid var(--accent);
+      margin: 0 auto 1rem;
+    }
+    .hero-card {
+      background: var(--ink); color: var(--cream);
+      border-radius: 1rem; padding: 2.5rem;
+      max-width: 360px; width: 100%;
+      box-shadow: 20px 20px 0 rgba(232,93,38,0.15);
+      position: relative;
+    }
+    .hero-card::before {
+      content: '✦';
+      position: absolute; top: 1.5rem; left: 1.5rem;
+      font-size: 1.2rem; color: var(--gold);
+    }
+    .hero-card-title {
+      font-size: 1.3rem; font-weight: 800;
+      margin-bottom: 1.5rem; line-height: 1.3;
+    }
+    .topic-list { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+    .topic-list li {
+      display: flex; align-items: flex-start; gap: 0.7rem;
+      font-size: 0.9rem; line-height: 1.4;
+    }
+    .topic-list li::before {
+      content: '→'; color: var(--accent); flex-shrink: 0; margin-top: 1px;
+    }
+    .hero-card-footer {
+      margin-top: 2rem; padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.8rem; color: rgba(245,240,232,0.5);
+      display: flex; gap: 1.5rem;
+    }
+    .hero-card-footer strong { display: block; color: var(--cream); font-size: 1.1rem; }
+
+    /* ── CREDENTIALS ── */
+    .credentials {
+      background: var(--ink); color: var(--cream);
+      padding: 4rem 3rem;
+      display: flex; align-items: center; justify-content: center;
+      gap: 4rem; flex-wrap: wrap;
+    }
+    .cred-item { text-align: center; }
+    .cred-num {
+      font-family: 'Heebo', sans-serif;
+      font-size: 3rem; font-weight: 900; color: var(--accent);
+      line-height: 1;
+    }
+    .cred-label { font-size: 0.85rem; color: rgba(245,240,232,0.6); margin-top: 0.3rem; }
+    .cred-divider { width: 1px; height: 60px; background: rgba(255,255,255,0.15); }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 6rem 3rem; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Heebo', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 900; letter-spacing: -0.5px;
+      line-height: 1.1; margin-bottom: 1.2rem;
+    }
+    .section-sub { color: var(--mid); font-size: 1.05rem; line-height: 1.7; max-width: 560px; }
+
+    /* ── SERVICES ── */
+    #services {
+      background: var(--cream);
+    }
+    .services-header { max-width: 1100px; margin: 0 auto 3.5rem; }
+    .services-grid {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--light); border: 1px solid var(--border);
+      border-radius: 0.75rem; padding: 2rem;
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative; overflow: hidden;
+    }
+    .service-card::after {
+      content: '';
+      position: absolute; bottom: 0; right: 0; left: 0;
+      height: 3px;
+      background: var(--accent);
+      transform: scaleX(0); transform-origin: right;
+      transition: transform 0.3s;
+    }
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+    .service-card:hover::after { transform: scaleX(1); }
+    .service-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .service-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .service-card p { font-size: 0.88rem; color: var(--mid); line-height: 1.6; }
+
+    /* ── TOPICS ── */
+    #topics { background: var(--light); }
+    .topics-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .topics-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+    .topic-item {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.2rem 1.5rem; border: 1px solid var(--border);
+      border-radius: 0.5rem; cursor: default;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .topic-item:hover { background: var(--cream); border-color: var(--accent); }
+    .topic-num {
+      font-family: 'Heebo', sans-serif;
+      font-size: 0.75rem; font-weight: 900; color: var(--accent);
+      min-width: 28px; margin-top: 2px;
+    }
+    .topic-item h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .topic-item p { font-size: 0.82rem; color: var(--mid); line-height: 1.5; }
+
+    .qualifications { margin-top: 2rem; }
+    .qual-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1rem 0; border-bottom: 1px solid var(--border);
+    }
+    .qual-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .qual-item h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .qual-item p { font-size: 0.82rem; color: var(--mid); }
+
+    /* ── ABOUT ── */
+    #about { background: var(--cream); }
+    .about-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-text p { font-size: 1.05rem; line-height: 1.8; color: #2d2d2d; margin-bottom: 1.2rem; }
+    .about-visual {
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .about-tag-cloud { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .tag {
+      background: var(--ink); color: var(--cream);
+      padding: 0.4rem 0.9rem; border-radius: 2rem;
+      font-size: 0.8rem; font-weight: 600;
+    }
+    .tag.light { background: transparent; border: 1.5px solid var(--ink); color: var(--ink); }
+    .tag.accent { background: var(--accent); color: #fff; }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--ink); color: var(--cream);
+      text-align: center; padding: 6rem 3rem;
+    }
+    #contact .section-label { color: var(--gold); }
+    #contact .section-title { color: var(--cream); max-width: 600px; margin: 0 auto 1.2rem; }
+    #contact .section-sub { color: rgba(245,240,232,0.6); margin: 0 auto 3rem; }
+    .contact-grid { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
+    .contact-item {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 0.75rem; padding: 1.5rem 2rem;
+      min-width: 200px; text-align: center;
+    }
+    .contact-item .ci-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .contact-item .ci-label { font-size: 0.75rem; color: rgba(245,240,232,0.45); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.3rem; }
+    .contact-item a, .contact-item span { color: var(--cream); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+    .contact-item a:hover { color: var(--gold); }
+
+    .boris-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid var(--gold);
+      color: var(--gold); font-weight: 600;
+      padding: 0.75rem 1.8rem; border-radius: 0.4rem;
+      text-decoration: none; font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+    .boris-link:hover { background: rgba(201,168,76,0.25); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #070b10; color: rgba(245,240,232,0.35);
+      text-align: center; padding: 1.5rem;
+      font-size: 0.8rem;
+    }
+
+    /* ── GALLERY ── */
+    #gallery { background: var(--light); }
+    .gallery-inner { max-width: 1100px; margin: 0 auto; }
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+      margin-top: 2rem;
+    }
+    .gallery-grid img {
+      width: 100%; aspect-ratio: 4/3; object-fit: cover;
+      border-radius: 0.5rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .gallery-grid img:hover { transform: scale(1.02); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+
+    /* ── ANIMATE ON SCROLL (simple) ── */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 800px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
+      .hero-visual { display: flex; }
+      .hero-photo { width: 80px; height: 80px; }
+      section { padding: 4rem 1.5rem; }
+      .topics-inner, .about-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .credentials { gap: 2rem; padding: 3rem 1.5rem; }
+      .cred-divider { display: none; }
+      .gallery-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo"><img src="logo.png" alt="לוגו">נתן <span>דביר</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">שירותים</a></li>
+    <li><a href="#topics">נושאים</a></li>
+    <li><a href="#about">אודות</a></li>
+    <li><a href="#contact">צור קשר</a></li>
+    <li><a href="boris.html">Research</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">בואו נדבר</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <span class="hero-tag">הרצאות · סדנאות · ייעוץ ארגוני</span>
+    <h1>מעצב<br/>חוויות<br/><em>למידה</em></h1>
+    <p class="hero-subtitle">
+      עובד עם צוותי חינוך, מנהלי מוסדות וארגונים —
+      שמכינים את האנשים שלהם לעידן הבינה המלאכותית.
+    </p>
+    <div class="hero-actions">
+      <a href="#services" class="btn-primary">לשירותים</a>
+      <a href="#contact" class="btn-secondary">צור קשר ←</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <img src="natan - 1.jpg" alt="נתן דביר" class="hero-photo" />
+      <div class="hero-card-title">נושאים מרכזיים<br/>להרצאות וסדנאות</div>
+      <ul class="topic-list">
+        <li>הוראה ולמידה בעידן ה-AI</li>
+        <li>ניהול שינוי וחדשנות ארגונית</li>
+        <li>מנהיגות חינוכית במאה ה-21</li>
+        <li>עיצוב חוויות למידה לארגונים</li>
+        <li>יזמות, יצירתיות ומיומנויות עתיד</li>
+      </ul>
+      <div class="hero-card-footer">
+        <div><strong>6</strong>שנות ניסיון</div>
+        <div><strong>MBA</strong>אוניברסיטת אריאל</div>
+        <div><strong>מופ"ת</strong>בוגר</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<div class="credentials">
+  <div class="cred-item">
+    <div class="cred-num">6</div>
+    <div class="cred-label">שנות ניסיון בלמידה דיגיטלית</div>
+  </div>
+  <div class="cred-divider"></div>
+  <div class="cred-item">
+    <div class="cred-num">MBA</div>
+    <div class="cred-label">אוניברסיטת אריאל</div>
+  </div>
+  <div class="cred-divider"></div>
+  <div class="cred-item">
+    <div class="cred-num">מופ"ת</div>
+    <div class="cred-label">בוגר קורס יזמות ועיצוב למידה</div>
+  </div>
+  <div class="cred-divider"></div>
+  <div class="cred-item">
+    <div class="cred-num">HRplus</div>
+    <div class="cred-label">פיתוח למידה ארגונית</div>
+  </div>
+  <div class="cred-divider"></div>
+  <div class="cred-item">
+    <div class="cred-num">מרצה</div>
+    <div class="cred-label">צוותי חינוך, מנהלים וארגונים</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header reveal">
+    <div class="section-label">מה אני מציע</div>
+    <h2 class="section-title">שירותים לארגונים ולצוותי חינוך</h2>
+    <p class="section-sub">מפגשים מותאמים אישית לצרכי הארגון — מהרצאה חד-פעמית ועד תהליך פיתוח מקצועי מלא.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">🎤</div>
+      <h3>הרצאות השראה</h3>
+      <p>הרצאות מרתקות ומעשיות לצוותי חינוך, מנהלי מוסדות ומנהלים בארגונים — על AI, חדשנות ומנהיגות בעידן של שינוי מהיר.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🛠</div>
+      <h3>סדנאות ידע מעשי</h3>
+      <p>סדנאות hands-on לצוותים ולמנהלים: שימוש בכלי AI, עיצוב תהליכי למידה ופיתוח מיומנויות עתיד בתוך הארגון.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🎓</div>
+      <h3>השתלמויות מוסמכות</h3>
+      <p>קורסי השתלמות מוסמכים לצוותי חינוך ומנהלי מוסדות בנושאי טכנו-פדגוגיה, AI וחינוך חדשני.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🏢</div>
+      <h3>ייעוץ ארגוני</h3>
+      <p>ליווי ארגונים ומוסדות בתהליכי שינוי, הטמעת AI ובניית תרבות למידה — ממנהלים בכירים ועד צוותי שטח.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TOPICS -->
+<section id="topics">
+  <div class="topics-inner">
+    <div>
+      <div class="section-label reveal">תחומי הרצאה</div>
+      <h2 class="section-title reveal">נושאים מרכזיים</h2>
+      <p class="section-sub reveal">כל נושא מבוסס על ניסיון מעשי, מחקר עדכני ותובנות מהשטח.</p>
+      <div class="topics-list">
+        <div class="topic-item reveal">
+          <span class="topic-num">01</span>
+          <div>
+            <h4>AI ועתיד הלמידה</h4>
+            <p>כיצד הבינה המלאכותית משנה ארגונים, מוסדות ואנשים — ומה עושים עם זה עכשיו.</p>
+          </div>
+        </div>
+        <div class="topic-item reveal">
+          <span class="topic-num">02</span>
+          <div>
+            <h4>ניהול שינוי וחדשנות ארגונית</h4>
+            <p>כיצד מוביל מנהל תהליך שינוי אמיתי — מהחזון ועד ההטמעה בשטח.</p>
+          </div>
+        </div>
+        <div class="topic-item reveal">
+          <span class="topic-num">03</span>
+          <div>
+            <h4>מנהיגות חינוכית במאה ה-21</h4>
+            <p>הכלים שמנהל מוסד חינוכי צריך היום: למידה ארגונית, חדשנות ועמידות בלחץ.</p>
+          </div>
+        </div>
+        <div class="topic-item reveal">
+          <span class="topic-num">04</span>
+          <div>
+            <h4>עיצוב חוויות למידה לארגונים</h4>
+            <p>בניית תרבות למידה שגורמת לאנשים לצמוח — בכיתה, בצוות ובארגון כולו.</p>
+          </div>
+        </div>
+        <div class="topic-item reveal">
+          <span class="topic-num">05</span>
+          <div>
+            <h4>יזמות, יצירתיות ומיומנויות עתיד</h4>
+            <p>טיפוח חשיבה יזמית ופתרון בעיות יצירתי — כישורים שנדרשים בכל ארגון.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="section-label reveal">השכלה והסמכות</div>
+      <h2 class="section-title reveal">רקע מקצועי</h2>
+      <div class="qualifications reveal">
+        <div class="qual-item">
+          <span class="qual-icon">🎓</span>
+          <div>
+            <h4>תואר שני (MBA) — ניהול עסקי</h4>
+            <p>אוניברסיטת אריאל | מסלול מחקרי בלמידה ארגונית</p>
+          </div>
+        </div>
+        <div class="qual-item">
+          <span class="qual-icon">📜</span>
+          <div>
+            <h4>יזמות ועיצוב למידה</h4>
+            <p>בוגר קורס מוסמך — מכון מופ"ת</p>
+          </div>
+        </div>
+        <div class="qual-item">
+          <span class="qual-icon">📜</span>
+          <div>
+            <h4>פיתוח למידה ארגונית</h4>
+            <p>בוגר קורס — HRplus</p>
+          </div>
+        </div>
+        <div class="qual-item">
+          <span class="qual-icon">📚</span>
+          <div>
+            <h4>חינוך מיוחד ולימודי מקרא</h4>
+            <p>תואר ראשון | ניסיון הוראה של 18+ שנה</p>
+          </div>
+        </div>
+        <div class="qual-item">
+          <span class="qual-icon">🤖</span>
+          <div>
+            <h4>מרצה AI וטכנו-פדגוגיה</h4>
+            <p>השתלמויות מוסמכות לצוותי חינוך ומנהלי בתי ספר — דתיים וכלליים</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-text reveal">
+      <div class="section-label">אודות</div>
+      <h2 class="section-title">נתן דביר</h2>
+      <p>
+        מומחה ללמידה דיגיטלית ובינה מלאכותית, יזמות חינוכית וחדשנות ארגונית.
+        עם 6 שנות ניסיון בלמידה דיגיטלית — החל בהוראת ילדים עם צרכים מיוחדים ועד לפיתוח תוכניות השתלמות לצוותי הוראה ברחבי הארץ.
+      </p>
+      <p>
+        כיום עובד עם צוותי חינוך, מנהלי מוסדות וארגונים — מרצה, מנחה ומייעץ בתחומי AI, ניהול שינוי ועיצוב למידה.
+        משמש גם כמנהל ידע ודיגיטל בהביתה — ארגון חברתי לאומי לקהילות עולים.
+      </p>
+      <p>
+        לומד לתואר שני (MBA) באוניברסיטת אריאל, במסלול מחקרי בלמידה ארגונית — ומביא את הידע האקדמי ישירות לשטח.
+      </p>
+    </div>
+    <div class="about-visual reveal">
+      <div class="section-label">תחומי מומחיות</div>
+      <div class="about-tag-cloud" style="margin-top:1rem">
+        <span class="tag accent">AI וחדשנות ארגונית</span>
+        <span class="tag">ניהול שינוי</span>
+        <span class="tag light">מנהיגות חינוכית</span>
+        <span class="tag accent">עיצוב למידה</span>
+        <span class="tag">פיתוח מקצועי</span>
+        <span class="tag light">למידה ארגונית</span>
+        <span class="tag">יזמות חינוכית</span>
+        <span class="tag light">טכנו-פדגוגיה</span>
+        <span class="tag">חינוך דיגיטלי</span>
+        <span class="tag accent">הרצאות לארגונים</span>
+        <span class="tag light">מיומנויות עתיד</span>
+        <span class="tag">חינוך חירום</span>
+      </div>
+      <div style="margin-top:2rem; padding:1.5rem; background:var(--ink); color:var(--cream); border-radius:0.75rem;">
+        <p style="font-size:0.9rem; line-height:1.7; color:rgba(245,240,232,0.8);">
+          "בין אם אתם צוות חינוכי, מנהלי מוסד או ארגון שרוצה לצמוח — השאלה היא אותה שאלה: איך עוזרים לאנשים ללמוד ולהתפתח בעידן שמשתנה כל הזמן."
+        </p>
+        <p style="font-size:0.8rem; color:var(--gold); margin-top:0.8rem; font-weight:600;">— נתן דביר</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-inner">
+    <div class="section-label reveal">תמונות</div>
+    <h2 class="section-title reveal">בפעולה</h2>
+    <div class="gallery-grid">
+      <img src="natan - 2.webp" alt="נתן דביר" class="reveal" loading="lazy" />
+      <img src="natan - 3.jpg"  alt="נתן דביר" class="reveal" loading="lazy" />
+      <img src="natan - 4.jpg"  alt="נתן דביר" class="reveal" loading="lazy" />
+      <img src="natan - 5.jpg"  alt="נתן דביר" class="reveal" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">בואו נדבר</div>
+  <h2 class="section-title">מוכנים לשיתוף פעולה?</h2>
+  <p class="section-sub">השאירו פרטים ואחזור אליכם בהקדם לתיאום הרצאה, סדנה או ייעוץ.</p>
+  <div class="contact-grid">
+    <div class="contact-item">
+      <div class="ci-icon">📞</div>
+      <div class="ci-label">טלפון</div>
+      <a href="tel:054-7466058">054-7466058</a>
+    </div>
+    <div class="contact-item">
+      <div class="ci-icon">✉️</div>
+      <div class="ci-label">אימייל</div>
+      <a href="mailto:arielrus@gmail.com">arielrus@gmail.com</a>
+    </div>
+    <div class="contact-item">
+      <div class="ci-icon">📍</div>
+      <div class="ci-label">מיקום</div>
+      <span>אריאל, ישראל</span>
+    </div>
+  </div>
+  <a href="boris.html" class="boris-link">→ לעמוד המחקר של ד"ר בוריס דוברובורסקי</a>
+</section>
+
+<footer>
+  <p>© 2025 נתן דביר | כל הזכויות שמורות</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
